@@ -13,15 +13,16 @@ typedef long long ll;
 typedef vector<int> vi;
 
 //START
-int fen[100100] = {0};
+typedef long long T;
+T fen[100100] = {0};
 
-void update(int p, int val, int n){
+void update(int p, T val, int n){
   for(int i = p; i<=n; i+=i&-i)
     fen[i]+=val;
 }
 
-int sum(int p){
-  int ans = 0;
+T sum(int p){
+  T ans = 0;
   for(int i = p; i; i-=i&-i)
     ans+=fen[i];
   return ans;

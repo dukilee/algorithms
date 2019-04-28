@@ -65,7 +65,7 @@ class SegTree{
     }
 
     void build(vector<T>& v){
-      tree.resize(3*v.size());
+      tree.resize(10+4*v.size());
       n = v.size();
       build(1, 0, n-1, v);
     }

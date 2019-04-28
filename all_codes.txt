@@ -1,0 +1,134 @@
+fenwick
+
+
+int fen[100100] = {0};
+
+void update(int p, int val, int n){
+  for(int i = p; i<=n; i+=i&-i)
+    fen[i]+=val;
+}
+
+int sum(int p){
+  int ans = 0;
+  for(int i = p; i; i-=i&-i)
+    ans+=fen[i];
+  return ans;
+}
+-------------------------------------------
+lca
+
+
+// GRAFO DE 1 a n;
+
+int father[100100][20];
+vi grafo[100100];
+int logn;
+int dept[100100];
+
+void DFS(int x, int p){
+  for(int i = 1 ; i<=logn; i++){
+    father[x][i] = father[father[x][i-1]][i-1];
+  }
+
+  for(vi::iterator it = grafo[x].begin(); it!=grafo[x].end(); it++){
+     if(*it == p) continue;
+     father[*it][0] = x;
+     dept[*it] = dept[x] + 1;
+     DFS(*it, x);
+  }
+}
+
+int goup(int a, int dist){
+  for(int i = 0; dist; i++){
+    if(dist & (1<<i)){
+      a = father[a][i];
+      dist -= 1<<i;
+    }
+  }
+  return a;
+}
+
+int LCA(int a, int b){
+  if(dept[a]<dept[b]) swap(a, b);
+  a = goup(a, dept[a] - dept[b]);
+  if(a==b) return a;
+  for(int i = logn; i>=0; i--){
+    if(father[a][i] != father[b][i]){
+      a = father[a][i];
+      b = father[b][i];
+    }
+  }
+  return father[a][0];
+}
+
+void preLCA(int n /*quant vertex*/){
+  logn = 0; 
+  while((1<<(logn+1))<=n) logn++;
+  dept[1] = 0;
+  for(int i = 0; i<=logn; i++){
+    father[0][i] = father[1][i] = 1;
+  }
+  DFS(1, 0);
+}
+
+-------------------------------------------
+mo
+
+
+// MO for [l, r]
+struct Query{
+  int l, r, p;
+  //left, right, position
+};
+const int BLOCK_SIZE = 317; //sqrt(1e5)
+
+int add(int x); // x is the element from the array
+int del(int x); // x is the element from the array 
+
+bool comp(Query a, Query b){
+  if(a.l/BLOCK_SIZE != b.l/BLOCK_SIZE)
+    return a.l/BLOCK_SIZE < b.l/BLOCK_SIZE;
+  return a.r < b.r;
+}
+
+/**
+* v -> vector where the queries are performed
+* q -> queries
+*/
+void mo(vector<int>& v, vector<Query>& queries, vector<long long>& ans){
+  int left, right;
+  long long curr;
+
+  rp(i, (int) queries.size()){
+    queries[i].p = i;
+  }
+
+  sort(queries.begin(), queries.end(), comp);
+
+  left = right = queries[0].l;
+  curr = add(v[left]); 
+  for(auto q : queries){
+    while(left<q.l){
+      curr += del(v[left]);
+      left++;
+    }
+
+    while(left>q.l){
+      left--;
+      curr += add(v[left]);
+    }
+
+    while(right<q.r){
+      right++;
+      curr += add(v[right]);
+    }
+
+    while(right>q.r){
+      curr += del(v[right]);
+      right--;
+    }
+
+    ans[q.p] = curr;
+  }
+}
+-------------------------------------------

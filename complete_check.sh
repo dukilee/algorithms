@@ -4,7 +4,7 @@ folders=$(ls -d */)
 all_okay=true
 
 for f in $folders; do
-  sh verifier.sh $f || all_okay=false
+  bash verifier.sh $f || all_okay=false
 done
 
 if $all_okay ; then

@@ -32,9 +32,21 @@ else
   done
 fi
 
-rm diff.exe
-rm temp.out
-rm temp_exec.exe
+if [ -f diff ]; then
+	rm diff #Ubuntu
+elif [ -f diff.exe ]; then
+	rm diff.exe #Windows
+fi
+
+if [ -f temp_exec ]; then
+	rm temp_exec
+elif [ -f temp_exec.exe ]; then
+	rm temp_exec.exe
+fi
+
+if [ -f temp.out ]; then
+	rm temp.out
+fi
 
 if $flag; then
   echo -e '\e[32m[SUCCS]\e[0m '${f%/}

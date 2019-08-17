@@ -31,7 +31,12 @@ else
   echo -e '\e[31m[COULD BE A LOT BETTER]\e[0m '
 fi
 
-rm file_parser.exe
+if [ -f file_parser ]; then
+	rm file_parser
+elif [-f file_parser.exe ]; then
+	rm file_parser.exe
+fi
+
 rm temp
 
 

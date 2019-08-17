@@ -37,7 +37,7 @@ void mo(vector<int>& v, vector<Query>& queries, vector<long long>& ans){
   int left, right;
   long long curr;
 
-  rp(i, (int) queries.size()){
+	for(int i = 0; i<queries.size(); i++){
     queries[i].p = i;
   }
 
@@ -88,20 +88,20 @@ int main(){
   int n, m;
   cin>>n;
   vector<int> v(n+1);
-  rp(i, n){
+	for(int i = 0; i<n; i++){
     cin>>v[i+1];
   }
 
   cin>>m;
   vector<Query> q(m);
-  rp(i, m){
+	for(int i = 0; i<m; i++){
     cin>>q[i].l>>q[i].r;
   }
 
   vector<long long> ans(m);
   mo(v, q, ans);
 
-  rp(i, m){
+	for(int i = 0; i<m; i++){
     cout<<ans[i]<<endl;
   }
 }

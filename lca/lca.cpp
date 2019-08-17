@@ -72,14 +72,14 @@ int main(){
   int n, q;
   int x, y;
   cin>>n;
-  rp(i, n-1){
+	for(int i = 0; i<n-1; i++){
     scanf("%d %d", &x, &y);
     grafo[x].pb(y);
     grafo[y].pb(x);
   }
   preLCA(n);
   cin>>q;
-  rp(i, q){
+	for(int i = 0; i<q; i++){
     scanf("%d %d", &x, &y);
     cout<<LCA(x, y)<<endl;
   }

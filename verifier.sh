@@ -13,8 +13,14 @@ if ! [ -f $f$cpp_name ]; then
   echo There is no cpp in ${f%/}.
   flag=false
 else
-  g++ $f$cpp_name -std=c++11 -o temp_exec
+	#Add template to algorithm
+	g++ format.cpp -o format && ./format < $f$cpp_name > temp.cpp
 
+
+	#Compile Algorithm
+  g++ temp.cpp -std=c++11 -o temp_exec || echo -e '\e[31m[ERROR]\e[0m Compilation error for' ${f%/}
+
+	#Test algorithm
   inputs=$(ls -d $f*.in)
   for i in $inputs; do
     o=${i/.in/.out}
@@ -32,6 +38,7 @@ else
   done
 fi
 
+#Removing files that were generated
 if [ -f diff ]; then
 	rm diff #Ubuntu
 elif [ -f diff.exe ]; then
@@ -46,6 +53,16 @@ fi
 
 if [ -f temp.out ]; then
 	rm temp.out
+fi
+
+if [ -f temp.cpp ]; then
+	rm temp.cpp
+fi
+
+if [ -f format ]; then
+	rm format
+elif [ -f format.exe ]; then
+	rm format.exe
 fi
 
 if $flag; then

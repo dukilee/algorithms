@@ -90,13 +90,13 @@ int main(){
   int n;
   cin>>n>>operation;
   vector<ll> v(n);
-  rp(i, n){
+	for(int i = 0; i<n; i++){
     cin>>v[i];
   }
   st.build(v);
   int q;
   cin>>q;
-  rp(i, q){
+	for(int i = 0; i<q; i++){
     int x, y, z;
     cin>>x>>y>>z;
     if(x==0){

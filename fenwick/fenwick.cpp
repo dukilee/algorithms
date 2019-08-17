@@ -32,7 +32,7 @@ T sum(int p){
 int main(){
   int n;
   cin>>n;
-  rp(i, n){
+	for(int i = 0; i<n; i++){
     int x;
     cin>>x;
     update(i+1, x, n);
@@ -41,7 +41,7 @@ int main(){
   cin>>q;
   int x, y;
 
-  rp(i , q){
+	for(int i = 0; i<q; i++){
     cin>>x>>y;
     cout<<sum(y)-sum(x-1)<<endl;
   }

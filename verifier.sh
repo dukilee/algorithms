@@ -6,9 +6,18 @@ if ! [ $1 ]; then
   echo Please inform the folder to check
 fi
 
+
 f=${1%/}"/"
 flag=true
 cpp_name=${f%/}".cpp"
+
+#Check if the algorithm was already used in a problem
+if ! [ -f ${f}use.txt ]; then
+	echo ${f%/} was never used to solve a problem
+	flag=false
+fi
+
+#Check if exists the cpp file
 if ! [ -f $f$cpp_name ]; then
   echo There is no cpp in ${f%/}.
   flag=false

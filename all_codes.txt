@@ -1,15 +1,16 @@
 fenwick
 
 
-int fen[100100] = {0};
+typedef long long T;
+T fen[100100] = {0};
 
-void update(int p, int val, int n){
+void update(int p, T val, int n){
   for(int i = p; i<=n; i+=i&-i)
     fen[i]+=val;
 }
 
-int sum(int p){
-  int ans = 0;
+T sum(int p){
+  T ans = 0;
   for(int i = p; i; i-=i&-i)
     ans+=fen[i];
   return ans;
@@ -99,7 +100,7 @@ void mo(vector<int>& v, vector<Query>& queries, vector<long long>& ans){
   int left, right;
   long long curr;
 
-  rp(i, (int) queries.size()){
+	for(int i = 0; i<queries.size(); i++){
     queries[i].p = i;
   }
 
@@ -187,7 +188,7 @@ class SegTree{
     }
 
     void build(vector<T>& v){
-      tree.resize(3*v.size());
+      tree.resize(10+4*v.size());
       n = v.size();
       build(1, 0, n-1, v);
     }

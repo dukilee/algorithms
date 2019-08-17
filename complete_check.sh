@@ -4,7 +4,9 @@ folders=$(ls -d */)
 all_okay=true
 
 for f in $folders; do
-  bash verifier.sh $f || all_okay=false
+	if ! [ $f == "auxiliar_codes/" ]; then
+		bash verifier.sh $f || all_okay=false
+	fi
 done
 
 if $all_okay ; then

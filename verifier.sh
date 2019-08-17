@@ -1,6 +1,6 @@
 #!bin/bash
 
-g++ diff.cpp -std=c++11 -o diff
+g++ auxiliar_codes/diff.cpp -std=c++11 -o diff
 
 if ! [ $1 ]; then
   echo Please inform the folder to check
@@ -14,7 +14,7 @@ if ! [ -f $f$cpp_name ]; then
   flag=false
 else
 	#Add template to algorithm
-	g++ format.cpp -o format && ./format < $f$cpp_name > temp.cpp
+	g++ auxiliar_codes/format.cpp -o format && ./format < $f$cpp_name > temp.cpp
 
 
 	#Compile Algorithm

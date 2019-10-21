@@ -1,5 +1,7 @@
 #include <bits/stdc++.h>
 
+// Gru, voce é um gostoso
+
 using namespace std;
 
 #define rep(i, a, b) for(int i = a; i<b; i++)

@@ -28,7 +28,7 @@ typedef vector<ll> vll;
 
 // START
 
-// Get fatorial module prime number p
+/// Get fatorial module prime number p
 int factMod(int n, int p){
 	int ans = 1;
 	while(n > 1){
@@ -41,8 +41,8 @@ int factMod(int n, int p){
 	return ans % p;
 }
 
-// k needs to be prime
-// if k is compsite, factorize and do it with its prime factors.
+/// k needs to be prime
+/// if k is compsite, factorize and do it with its prime factors.
 int fact_pow(int n, int k){
 	int ans = 0;
 	while(n) {
@@ -52,7 +52,7 @@ int fact_pow(int n, int k){
 	return ans;
 }
 
-//Binomial coeficients
+///Binomial coeficients
 
 #define MAXN 1000;
 
@@ -78,7 +78,7 @@ ll comb(ll n, ll k){
 	else return comb(n-1, k-1) + comb(n-1, k);
 }
 
-//Binomial coeficient module prime
+///Binomial coeficient module prime
 ll combModPrime(int n, int k, int p){
 	return fat[n] * modInv(fat[k], p)%p * modInv(fat, p) % p;
 }

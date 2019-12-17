@@ -37,10 +37,12 @@ void sieve(ll upperbound){
 	bs.set();
 	bs[0] = bs[1] = 0;
 	for(ll i = 2, i <= _sieve_size; i++){
-		for(ll j = i*i; j <= _sieve_size; j+=i){
-			bs[j] = 0;
+		if(bs[i]){
+			for(ll j = i*i; j <= _sieve_size; j+=i){
+				bs[j] = 0;
+			}
+			primes.pb(i);
 		}
-		primes.pb(i);
 	}
 }
 
